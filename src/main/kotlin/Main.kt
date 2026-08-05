@@ -3,14 +3,15 @@ package org.example
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
-
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+    print("Choose a detector\n1 - Integer\n2 - Floating Point\n3 - Binary\n4 - Email\n5 - Password\n")
+    val choice = readln().toIntOrNull() ?: 0
+    print("Enter the string to be checked: \n")
+    val inputString = readln()
+    val detector = detectorFactory(choice, inputString)
+    val result = detector.detect()
+    if(result) {
+        println("The input string is valid for the selected detector.")
+    } else {
+        println("The input string is NOT valid for the selected detector.")
     }
 }

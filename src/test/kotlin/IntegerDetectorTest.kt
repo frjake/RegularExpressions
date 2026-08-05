@@ -1,0 +1,38 @@
+import org.example.IntegerDetector
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+class IntegerDetectorTest {
+
+    @Test
+    fun testInitialState() {
+        val detector = IntegerDetector("123")
+        assertEquals("IntegerEmpty", detector.state::class.simpleName)
+    }
+
+    @Test
+    fun testValidInteger() {
+        val detector = IntegerDetector("123")
+        assertEquals(true, detector.detect())
+        val detector2 = IntegerDetector("1")
+        assertEquals(true, detector2.detect())
+        val detector3 = IntegerDetector("3452342352434534524346")
+        assertEquals(true, detector3.detect())
+    }
+
+    @Test
+    fun testInvalidInteger() {
+        val detector = IntegerDetector("0")
+        assertEquals(false, detector.detect())
+        val detector2 = IntegerDetector("01")
+        assertEquals(false, detector2.detect())
+        val detector3 = IntegerDetector("34a")
+        assertEquals(false, detector3.detect())
+    }
+
+    @Test
+    fun testEmptyString() {
+        val detector = IntegerDetector("")
+        assertEquals(false, detector.detect())
+    }
+}
