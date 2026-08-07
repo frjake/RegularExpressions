@@ -1,13 +1,26 @@
 package org.example
 
 class FloatingPointDetector(private val inputString: String) : Detector(inputString) {
-    override var state: State = Empty(this)
-    override val empty = Empty(this)
-    override val invalid = Invalid(this)
-    override val valid = Valid(this)
+    override val empty = FloatingPointEmpty(this)
+    override val invalid = FloatingPointInvalid(this)
+    override val valid = FloatingPointValid(this)
+    override var state: State = empty
+    var point = false
+        private set
+    var invalidChar = false
+        private set
+    var startingZero = false
+        private set
 
-    override fun detect(): Boolean {
-        // Implement the logic to detect if the input string is an integer
-        return state.submit()
+    fun setPoint(point: Boolean) {
+        this.point = point
+    }
+
+    fun setInvalidChar(invalidChar: Boolean) {
+        this.invalidChar = invalidChar
+    }
+
+    fun setStartingZero(startingZero: Boolean) {
+        this.startingZero = startingZero
     }
 }

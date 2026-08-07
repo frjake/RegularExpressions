@@ -1,9 +1,7 @@
 package org.example
 
-open class Valid(detector: Detector) : State(detector) {
-    override fun nextChar(next: Char) {
-        // Implement the logic to transition to the next state based on the next character
-    }
+abstract class Valid(private val detector: Detector) : State(detector) {
+    abstract override fun nextChar(next: Char)
 
     override fun submit(): Boolean {
         return true

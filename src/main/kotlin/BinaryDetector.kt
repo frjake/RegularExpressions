@@ -1,13 +1,20 @@
 package org.example
 
 class BinaryDetector(private val inputString: String): Detector(inputString) {
-    override var state: State = Empty(this)
-    override val empty = Empty(this)
-    override val invalid = Invalid(this)
-    override val valid = Valid(this)
+    override val empty = BinaryEmpty(this)
+    override val invalid = BinaryInvalid(this)
+    override val valid = BinaryValid(this)
+    override var state: State = empty
+    var startingZero = false
+        private set
+    var invalidChar = false
+        private set
 
-    override fun detect(): Boolean {
-        // Implement the logic to detect if the input string is a binary number
-        return state.submit()
+    fun setStartingZero(startingZero: Boolean) {
+        this.startingZero = startingZero
+    }
+
+    fun setInvalidChar(invalidChar: Boolean) {
+        this.invalidChar = invalidChar
     }
 }

@@ -5,9 +5,12 @@ import kotlin.test.assertEquals
 class IntegerDetectorTest {
 
     @Test
-    fun testInitialState() {
+    fun testInitialStates() {
         val detector = IntegerDetector("123")
         assertEquals("IntegerEmpty", detector.state::class.simpleName)
+        assertEquals("IntegerEmpty", detector.empty::class.simpleName)
+        assertEquals("IntegerInvalid", detector.invalid::class.simpleName)
+        assertEquals("IntegerValid", detector.valid::class.simpleName)
     }
 
     @Test
@@ -34,5 +37,6 @@ class IntegerDetectorTest {
     fun testEmptyString() {
         val detector = IntegerDetector("")
         assertEquals(false, detector.detect())
+        assertEquals("IntegerEmpty", detector.state::class.simpleName)
     }
 }
