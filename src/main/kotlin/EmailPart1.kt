@@ -1,11 +1,11 @@
 package org.example
 
-class BinaryEmpty(private val detector: BinaryDetector): State(detector) {
+class EmailPart1(private val detector: EmailDetector): State(detector) {
     override fun nextChar(next: Char) {
-        if(next == '1'){
-            detector.changeState(detector.valid)
+        if(next == '@') {
+            detector.changeState(detector.at)
         }
-        else{
+        else if(next.isWhitespace()) {
             detector.changeState(detector.invalid)
         }
     }

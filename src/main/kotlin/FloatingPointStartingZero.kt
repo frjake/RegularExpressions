@@ -1,9 +1,9 @@
 package org.example
 
-class BinaryEmpty(private val detector: BinaryDetector): State(detector) {
+class FloatingPointStartingZero(private val detector: FloatingPointDetector): State(detector) {
     override fun nextChar(next: Char) {
-        if(next == '1'){
-            detector.changeState(detector.valid)
+        if(next == '.'){
+            detector.changeState(detector.decimal)
         }
         else{
             detector.changeState(detector.invalid)

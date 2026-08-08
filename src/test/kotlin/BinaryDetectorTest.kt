@@ -9,26 +9,16 @@ class BinaryDetectorTest {
         val detector = BinaryDetector("0")
         assertEquals("BinaryEmpty", detector.state::class.simpleName)
         assertEquals("BinaryEmpty", detector.empty::class.simpleName)
+        assertEquals("BinaryEndingZero", detector.endingZero::class.simpleName)
         assertEquals("BinaryInvalid", detector.invalid::class.simpleName)
         assertEquals("BinaryValid", detector.valid::class.simpleName)
     }
 
     @Test
-    fun testStartingZero(){
-        val detector = BinaryDetector("0")
-        assertEquals(false, detector.invalidChar)
-        detector.setInvalidChar(true)
-        assertEquals(true, detector.invalidChar)
-
-        assertEquals(false, detector.startingZero)
-        detector.setStartingZero(true)
-        assertEquals(true, detector.startingZero)
-    }
-
-    @Test
-    fun testValidBinary(){
+    fun testBinaryValid(){
         val detector = BinaryDetector("1")
         assertEquals(true, detector.detect())
+        assertEquals("BinaryValid", detector.state::class.simpleName)
         val detector2 = BinaryDetector("11")
         assertEquals(true, detector2.detect())
         val detector3 = BinaryDetector("101")
@@ -40,17 +30,29 @@ class BinaryDetectorTest {
     }
 
     @Test
-    fun testInvalidBinary(){
+    fun testBinaryInvalid(){
         val detector = BinaryDetector("0")
         assertEquals(false, detector.detect())
+        assertEquals("BinaryInvalid", detector.state::class.simpleName)
         val detector2 = BinaryDetector("01")
         assertEquals(false, detector2.detect())
-        val detector3 = BinaryDetector("10")
+        assertEquals("BinaryInvalid", detector2.state::class.simpleName)
+         val detector3 = BinaryDetector("100a01")
         assertEquals(false, detector3.detect())
-        val detector4 = BinaryDetector("1000010")
+        assertEquals("BinaryInvalid", detector3.state::class.simpleName)
+        val detector4 = BinaryDetector("101a")
         assertEquals(false, detector4.detect())
-        val detector5 = BinaryDetector("100a01")
-        assertEquals(false, detector5.detect())
+        assertEquals("BinaryInvalid", detector4.state::class.simpleName)
+    }
+
+    @Test
+    fun testBinaryEndingZero(){
+        val detector = BinaryDetector("10")
+        assertEquals(false, detector.detect())
+        assertEquals("BinaryEndingZero", detector.state::class.simpleName)
+        val detector2 = BinaryDetector("1000010")
+        assertEquals(false, detector2.detect())
+        assertEquals("BinaryEndingZero", detector2.state::class.simpleName)
     }
 
     @Test

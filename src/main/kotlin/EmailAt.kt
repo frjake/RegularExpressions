@@ -1,12 +1,12 @@
 package org.example
 
-class EmailEmpty(private val detector: EmailDetector): State(detector) {
+class EmailAt(private val detector: EmailDetector): State(detector) {
     override fun nextChar(next: Char) {
-        if(next.isWhitespace() || next == '@') {
+        if(next.isWhitespace() || next == '@' || next == '.') {
             detector.changeState(detector.invalid)
         }
         else{
-            detector.changeState(detector.part1)
+            detector.changeState(detector.part2)
         }
     }
 

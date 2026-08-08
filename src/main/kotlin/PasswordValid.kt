@@ -1,10 +1,17 @@
 package org.example
 
-class PasswordValid(private val detector: PasswordDetector): Valid(detector) {
+// capital - yes
+// special - yes
+// length - yes
+// doesn't end with special - yes
+class PasswordValid(private val detector: PasswordDetector): State(detector) {
     override fun nextChar(next: Char) {
         if(detector.specialChar(next)){
-            detector.setLastSpecial(true)
-            detector.changeState(detector.invalid)
+            detector.changeState(detector.endingSpecial)
         }
+    }
+
+    override fun submit(): Boolean {
+        return true
     }
 }

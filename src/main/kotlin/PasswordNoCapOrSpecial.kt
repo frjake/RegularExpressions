@@ -1,17 +1,19 @@
 package org.example
 
-//empty state
-class PasswordEmpty(private val detector: PasswordDetector): State(detector) {
+// capital - no
+// special - no
+// length - doesn't matter yet
+// doesn't end with special - doesn't matter yet
+class PasswordNoCapOrSpecial(private val detector: PasswordDetector): State(detector) {
     override fun nextChar(next: Char) {
-        detector.setChars()
+        if(detector.chars < 8){
+            detector.setChars()
+        }
         if(detector.specialChar(next)){
             detector.changeState(detector.special)
         }
         else if(next.isUpperCase()){
             detector.changeState(detector.capital)
-        }
-        else{
-            detector.changeState(detector.noCapOrSpecial)
         }
     }
 

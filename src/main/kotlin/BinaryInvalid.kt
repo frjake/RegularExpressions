@@ -1,12 +1,11 @@
 package org.example
 
-class BinaryInvalid(private val detector: BinaryDetector): Invalid(detector) {
+class BinaryInvalid(private val detector: BinaryDetector): State(detector) {
     override fun nextChar(next: Char) {
-        if(next == '1' && !detector.startingZero && !detector.invalidChar) {
-            detector.changeState(detector.valid)
-        }
-        else if(next != '0' && !detector.invalidChar) {
-            detector.setInvalidChar(true)
-        }
+        // Do nothing, as this is the invalid state
+    }
+
+    override fun submit(): Boolean {
+        return false
     }
 }

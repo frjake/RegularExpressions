@@ -1,11 +1,11 @@
 package org.example
 
-class BinaryEmpty(private val detector: BinaryDetector): State(detector) {
+class BinaryEndingZero(private val detector: BinaryDetector): State(detector) {
     override fun nextChar(next: Char) {
         if(next == '1'){
             detector.changeState(detector.valid)
         }
-        else{
+        else if (next != '0'){
             detector.changeState(detector.invalid)
         }
     }
